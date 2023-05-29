@@ -8,7 +8,7 @@ mode: rule
 log-level: debug
 
  # 日志等级 silent/error/warning/info/debug
-external-controller: :9090
+external-controller: 127.0.0.1:9090
 secret: ''
 ipv6: true
 # external-ui: Yacd
@@ -105,7 +105,7 @@ dns:
   perfer-h3: true
   ipv6: true
 #  ipv6-timeout: 300
-  listen: :5354
+  listen: 127.0.0.1:5354
   use-hosts: true
   enhanced-mode: fake-ip
   # fake-ip
