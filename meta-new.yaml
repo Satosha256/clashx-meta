@@ -171,7 +171,7 @@ dns:
   
 #Tuna DNS(Filter ?/log ?/Edns)
     - 'tls://101.6.6.6:8853#DIRECT'
-#    - 'https://101.6.6.6:8443/dns-query#DIRECT'
+    - 'https://101.6.6.6:8443/dns-query#DIRECT'
 #V6
 #    - 'tls://[2402:f000:1:416:101:6:6:6]:8853#DIRECT'
 #    - 'https://[2402:f000:1:416:101:6:6:6]:8443/dns-query#DIRECT'
@@ -227,7 +227,9 @@ dns:
 #    - 'https://dns.tuna.tsinghua.edu.cn:8443/dns-query#DIRECT'
 #Tuna DNS(Filter ?/log ?/Edns)
     - 'tls://101.6.6.6:8853#DIRECT'
-#    - 'tls://[2402:f000:1:416:101:6:6:6]:8853#DIRECT'
+    - 'https://101.6.6.6:8443/dns-query#DIRECT'
+#Adg
+    - 'quic://94.140.14.140:784#DIRECT'
 
 #Apad DNS(Filter ?/log ?/Edns)#分流DNS{TsingHua&Google&CF}
 #    - 'tls://h2o.apad.pro:853'
