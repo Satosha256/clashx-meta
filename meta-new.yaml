@@ -529,16 +529,6 @@ proxy-providers:
       interval: 600
 
 
-  Netease:
-    type: http
-    path: ./Proxy-Providers/Netease.yaml
-    url: https://cors.buildtest.site/https://gist.githubusercontent.com/LittleRey/eb883cde24fd1024bdd10c151ce28e50/raw/Netease.yaml
-    interval: 3600
-    health-check:
-      enable: true
-      url: http://music.163.com/generate_204
-      interval: 600
-
 
 proxy-groups:
   - name: 非CN-IP-代理
@@ -585,15 +575,6 @@ proxy-groups:
     
 
 
-  - name: 网易云音乐
-    type: select
-    use:
-    - Netease
-    proxies:
-    - DIRECT
-    - 非CN-IP-代理
-
-
 
 
   - name: CN-IP-直连
@@ -625,12 +606,6 @@ rule-providers:
     url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Proxy.list
     interval: 3600
 
-  GeoIP-Foreign:
-    type: http
-    behavior: classical
-    path: ./Rule-Providers/GeoIP-Foreign.list
-    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/GeoIP-Foreign.list
-    interval: 3600
 
   HTTPDNS:
     type: http
@@ -639,40 +614,7 @@ rule-providers:
     url: https://cors.buildtest.site/https://github.com/VirgilClyne/GetSomeFries/raw/main/ruleset/HTTPDNS.Block.yaml
     interval: 3600
 
-  Talk:
-    type: http
-    behavior: classical
-    path: ./Rule-Providers/Talk.list
-    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Talk.list
-    interval: 3600
 
-  Remote-DeskTop:
-    type: http
-    behavior: classical
-    path: ./Rule-Providers/Remote-DeskTop.list
-    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Remote-DeskTop.list
-    interval: 3600
-
-  UnBlock:
-    type: http
-    behavior: classical
-    path: ./Rule-Providers/UnBlock.list
-    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/UnBlock.list
-    interval: 3600
-
-  NeteaseMusic:
-    type: http
-    behavior: classical
-    path: ./Rule-Providers/NeteaseMusic.list
-    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/NeteaseMusic.list
-    interval: 3600
-
-  NeteaseMusicClient:
-    type: http
-    behavior: classical
-    path: ./Rule-Providers/NeteaseMusicClient.list
-    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/NeteaseMusicClient.list
-    interval: 3600
 
   Direct:
     type: http
@@ -681,12 +623,7 @@ rule-providers:
     url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Direct.list
     interval: 3600
 
-  Browser:
-    type: http
-    behavior: classical
-    path: ./Rule-Providers/Browser.list
-    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Browser.list
-    interval: 3600
+
 
 
 rules:
@@ -699,7 +636,6 @@ rules:
 # - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
 # - AND,((NETWORK,udp),(GEOSITE,youtube)),REJECT
 ###
- - AND,((RULE-SET,NeteaseMusicClient),(RULE-SET,NeteaseMusic)),网易云音乐
 
  - GEOSITE,openai,OPENAI
 
