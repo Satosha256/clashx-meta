@@ -1,0 +1,709 @@
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+mode: rule
+log-level: debug
+
+# 日志等级 silent/error/warning/info/debug
+
+ipv6: true
+# external-ui: ./Yacd-meta-gh-pages
+
+external-controller: 127.0.0.1:9090# RESTful API 监听地址
+secret: ''
+
+
+unified-delay: true
+geodata-mode: true
+tcp-concurrent: true
+enable-process: true
+
+
+
+#  find-process-mode has 3 values:always, strict, off
+#  - always, 开启，强制匹配所有进程
+#  - strict, 默认，由 clash 判断是否开启
+#  - off, 不匹配进程，推荐在路由器上使用此模式
+find-process-mode: always
+
+#自定义 geodata url
+geox-url:
+#full 
+  geoip: "https://cors.buildtest.site/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat"
+  geosite: "https://cors.buildtest.site/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat"
+  mmdb: "https://cors.buildtest.site/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb"
+
+#Geolite2
+#  mmdb: "https://cors.buildtest.site/https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb"
+#lite
+#  geoip: "https://cors.buildtest.site/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat"
+#  geosite: "https://cors.buildtest.site/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite-lite.dat"
+#  mmdb: "https://cors.buildtest.site/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb"
+#  mmdb: "https://cors.buildtest.site/https://github.com/Hackl0us/GeoIP2-CN/raw/release/Country.mmdb"
+
+#建议 
+#  geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat"
+#  geosite: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat"
+#  mmdb: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/Country.mmdb"
+
+# 全局 TLS 指纹，优先低于 proxy 内的 client-fingerprint
+# 可选： "chrome","firefox","safari","ios","random","none" options.
+# Utls is currently support TLS transport in TCP/grpc/WS/HTTP for VLESS/Vmess and trojan.
+global-client-fingerprint: chrome
+
+profile: # 存储 select 选择记录
+  store-selected: true
+
+  # 持久化 fake-ip
+  store-fake-ip: true
+
+sniffer:
+  enable: false
+  ## 对 redir-host 类型识别的流量进行强制嗅探
+  ## 如：Tun、Redir 和 TProxy 并 DNS 为 redir-host 皆属于
+  # force-dns-mapping: false
+  ## 对所有未获取到域名的流量进行强制嗅探
+  # parse-pure-ip: false
+  # 是否使用嗅探结果作为实际访问，默认 true
+  # 全局配置，优先级低于 sniffer.sniff 实际配置
+  override-destination: false
+  sniff: # TLS 默认如果不配置 ports 默认嗅探 443
+    TLS:
+      ports: [443, 8443]
+
+    # 默认嗅探 80
+    HTTP: # 需要嗅探的端口
+      ports: [80, 8080-8880]
+      # 可覆盖 sniffer.override-destination
+      override-destination: true
+  force-domain:
+    - +.v2ex.com
+  ## 对嗅探结果进行跳过
+  # skip-domain:
+  #   - Mijia Cloud
+  # 需要嗅探协议
+  # 已废弃，若 sniffer.sniff 配置则此项无效
+  sniffing:
+    - tls
+    - http
+  # 强制对此域名进行嗅探
+
+  # 仅对白名单中的端口进行嗅探，默认为 443，80
+  # 已废弃，若 sniffer.sniff 配置则此项无效
+  port-whitelist:
+    - "80"
+    - "443"
+    # - 8000-9999
+
+###################### redir-host######################
+hosts:
+ '*.clash.dev': 127.0.0.1
+# '.dev': 127.0.0.1
+ 'alpha.clash.dev': '::1'
+# 'test.com': [1.1.1.1, 2.2.2.2]
+# 'clash.lan': clash 
+# clash 为特别字段，将加入本地所有网卡的地址
+# 'baidu.com': google.com 
+# 只允许配置一个别名
+
+
+#MyDomain
+# '*.workers.dev': 162.159.36.1
+# '*.buildtest.site': 162.159.36.1
+ 'blog.buildtest.site': 162.159.36.1
+ 'googledrive.buildtest.site': 162.159.36.1
+ 'node.buildtest.site': 162.159.36.1
+ 'proxy.buildtest.site': 162.159.36.1
+ 'cproxy.buildtest.site': 162.159.36.1
+# 'google.ns.buildtest.site': 162.159.36.1
+# 'CloudFlareWarp.ns.buildtest.site': 162.159.36.1
+# 'adguard.ns.buildtest.site': 162.159.36.1
+
+# 'bc947f.dns.nextdns.io': '2403:ad80:4c00:d2::3fa3'
+# 'bc947f.dns2.nextdns.io': '2a00:11c0:97:7::1'
+# 'dns.nextdns.io': '2407:b9c0:e003:180:5054:ff:fe7f:c513'
+# 'dns2.nextdns.io': '2401:3bc0:600:101:c2f:a6e6:5afd:1'
+
+
+
+####################### DNS#######################
+dns:
+  enable: true
+  perfer-h3: false
+  ipv6: true
+  ipv6-timeout: 200
+  listen: 0.0.0.0:1053
+  use-hosts: true
+  enhanced-mode: fake-ip
+# fake-ip
+# redir-host
+###################### fake ip######################
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter: 
+    - '*.lan'
+    - '*.local'
+    - '*.oray.net'
+    - '*.*.oray.net'
+    - '*.oray.com'
+    - '*.*.oray.com'
+    - 'stun.parsec.app'
+    - 'stun.*.*.*'
+    - 'stun.*.*'
+    - 'localhost.ptlogin2.qq.com'
+    - '*.msftncsi.com'
+    - '*.msftconnecttest.com'
+    - '*.anydesk.com.cn'
+    - '*.*.anydesk.com.cn'
+    - '*.*.*.anydesk.com.cn'
+    - '*.*.*.*.anydesk.com.cn'
+    - '*.anydesk.com'
+    - '*.*.anydesk.com'
+    - '*.*.*.anydesk.com'
+    - '*.*.*.*.anydesk.com' 
+    - '*.nextdns.io'
+    - '*.*.nextdns.io'
+    - '*.*.*.nextdns.io'
+    - 'clients3.google.com'
+    - 'clients4.google.com'
+#    - '*.node.yh82l3dsytxzf8.com'
+
+  default-nameserver:
+  
+#Tuna DNS(Filter ?/log ?/Edns)
+    - 'tls://101.6.6.6:8853#DIRECT'
+#    - 'https://101.6.6.6:8443/dns-query#DIRECT'
+#V6
+#    - 'tls://[2402:f000:1:416:101:6:6:6]:8853#DIRECT'
+#    - 'https://[2402:f000:1:416:101:6:6:6]:8443/dns-query#DIRECT'
+
+#Adg
+    - 'quic://94.140.14.140:784#DIRECT'
+#    - 'tls://94.140.14.140:853#DIRECT'
+#    - 'https://94.140.14.140/dns-query#DIRECT'
+#    - 'quic://94.140.14.141:784#DIRECT'
+#    - 'tls://94.140.14.141:853#DIRECT'
+#    - 'https://94.140.14.141/dns-query#DIRECT'
+#    - 'quic://[2a10:50c0::1:ff]:784#DIRECT'
+#    - 'tls://[2a10:50c0::1:ff]:853#DIRECT'
+#    - 'https://[2a10:50c0::1:ff]/dns-query#DIRECT'
+#    - 'quic://[2a10:50c0::2:ff]:784#DIRECT'
+#    - 'tls://[2a10:50c0::2:ff]:853#DIRECT'
+#    - 'https://[2a10:50c0::2:ff]/dns-query#DIRECT'
+
+#Alidns
+#    - 'tls://223.5.5.5:853#DIRECT'
+#    - 'https://223.5.5.5/dns-query#h3=true#DIRECT'
+#    - 'tls://223.6.6.6:853#DIRECT'
+#    - 'https://223.6.6.6/dns-query#DIRECT'
+#    - 'tls://[2400:3200::1]:853#DIRECT'
+#    - 'https://[2400:3200::1]/dns-query#h3=true#DIRECT'
+#    - 'tls://[2400:3200:baba::1]:853#DIRECT'
+#    - 'https://[2400:3200:baba::1]/dns-query#DIRECT'
+
+#Tencent
+#    - 'tls://120.53.53.53:853#DIRECT'
+#    - 'tls://1.12.12.12:853#DIRECT'
+#    - 'https://120.53.53.53/dns-query#DIRECT'
+#    - 'https://1.12.12.12/dns-query#DIRECT'
+
+#google
+#    - 'tls://8.8.8.8:853#DIRECT'
+#    - 'https://8.8.8.8/dns-query#DIRECT'
+#    - 'tls://8.8.4.4:853#DIRECT'
+#    - 'https://8.8.4.4/dns-query#DIRECT'
+#    - 'tls://[2001:4860:4860::8844]:853#DIRECT'
+#    - 'https://[2001:4860:4860::8844]/dns-query#DIRECT'
+#    - 'tls://[2001:4860:4860::8888]:853#DIRECT'
+#    - 'https://[2001:4860:4860::8888]/dns-query#DIRECT'
+
+  # 配置查询域名使用的 DNS 服务器
+
+  proxy-server-nameserver:          
+#【Meta专属】解析国外代理服务器域名的dns
+# 不写时用nameserver解析
+
+#Tuna DNS(Filter ?/log ?/Edns)
+#    - 'tls://dns.tuna.tsinghua.edu.cn:8853#DIRECT'
+#    - 'https://dns.tuna.tsinghua.edu.cn:8443/dns-query#DIRECT'
+#Tuna DNS(Filter ?/log ?/Edns)
+    - 'tls://101.6.6.6:8853#DIRECT'
+#    - 'tls://[2402:f000:1:416:101:6:6:6]:8853#DIRECT'
+
+#Apad DNS(Filter ?/log ?/Edns)#分流DNS{TsingHua&Google&CF}
+#    - 'tls://h2o.apad.pro:853'
+#    - 'https://h2o.apad.pro/dns-query#h3=true'
+#    - 'https://edns.apad.pro:3306/dns-query#DIRECT'
+#    - 'https://doh.apad.pro/dns-query#DIRECT'
+#Apad DNS CN
+#    - 'https://doh.apad.pro/cn-query#DIRECT'
+
+
+  nameserver:
+
+#AliDNS(Filtering/loging/Edns/Warning!)
+#    - 'tls://dns.alidns.com:853#DIRECT'
+#    - 'https://dns.alidns.com/dns-query#h3=true#DIRECT'
+#    - 'tls://223.5.5.5:853#DIRECT'
+    - 'https://223.5.5.5/dns-query#h3=true#DIRECT'
+
+#Tencent DnsPod(Filtering/loging/Warning!)
+#    - 'tls://dns.pub:853#DIRECT'
+#    - 'https://dns.pub/dns-query#DIRECT'
+    - 'tls://1.12.12.12:853#DIRECT'
+#    - 'https://1.12.12.12/dns-query#DIRECT'
+
+#Cfiec DNS(Filtering/loging/Warning!)
+#    - 'tls://dns.ipv6dns.com:853#DIRECT'
+#    - 'https://dns.ipv6dns.com/dns-query#DIRECT'
+
+#360DNS(Filtering/loging/Warning!)
+#    - 'https://doh.360.cn/dns-query#DIRECT'
+#    - 'tls://dot.360.cn:853#DIRECT'
+
+#18bit
+#    - 'https://doh.18bit.cn/dns-query#DIRECT'
+#    - 'tls://dns.18bit.cn#DIRECT'
+
+
+#AdgFamily
+#    - 'quic://family.adguard-dns.com:784#DIRECT'
+#    - 'tls://family.adguard-dns.com:853#DIRECT'
+#    - 'https://family.adguard-dns.com/dns-query#DIRECT'
+
+#MoeDNS
+#    - 'https://pdns.itxe.net/dns-query#DIRECT'
+#    - 'tls://pdns.itxe.net:853#DIRECT'
+#    - 'quic://pdns.itxe.net:853#DIRECT'
+
+
+#Tuna DNS(Filter ?/log ?/Edns)
+#    - 'tls://dns.tuna.tsinghua.edu.cn:8853#DIRECT'
+#    - 'https://dns.tuna.tsinghua.edu.cn:8443/dns-query#DIRECT'
+
+  fallback: 
+
+
+#CF&Google UDP DNS
+#    - 'udp://8.8.8.8:53#非CN-IP-代理'
+#    - 'udp://1.1.1.1:53#非CN-IP-代理'
+
+#    - 'tls://1.1.1.1:853'
+    - 'https://1.1.1.1/dns-query#h3=true'
+
+#google
+    - 'tls://8.8.8.8:853'
+#    - 'tls://8.8.4.4:853#DIRECT'
+#    - 'tls://[2001:4860:4860::8844]:853'
+#    - 'tls://[2001:4860:4860::8888]:853#DIRECT'
+#    - 'https://8.8.8.8/dns-query'
+#    - 'https://8.8.4.4/dns-query#非CN-IP-代理'
+#    - 'https://[2001:4860:4860::8844]/dns-query'
+#    - 'https://[2001:4860:4860::8888]/dns-query#非CN-IP-代理'
+
+
+#Adg
+    - 'quic://94.140.14.140:784#DIRECT'
+#    - 'tls://94.140.14.140:853#DIRECT'
+#    - 'https://94.140.14.140/dns-query#DIRECT'
+#    - 'quic://94.140.14.141:784#DIRECT'
+#    - 'tls://94.140.14.141:853#DIRECT'
+#    - 'https://94.140.14.141/dns-query#DIRECT'
+#IPV6
+#    - 'quic://[2a10:50c0::1:ff]:784#DIRECT'
+#    - 'tls://[2a10:50c0::1:ff]:853#DIRECT'
+#    - 'https://[2a10:50c0::1:ff]/dns-query#DIRECT'
+#    - 'quic://[2a10:50c0::2:ff]:784#DIRECT'
+#    - 'tls://[2a10:50c0::2:ff]:853#DIRECT'
+#    - 'https://[2a10:50c0::2:ff]/dns-query#DIRECT'
+
+#Google Doh(No Filter/loging/Anycast/Edns)
+#    - 'tls://dns.google.com:853'
+#    - 'https://dns.google.com/dns-query'
+#    - 'tls://dns.google.com:853#DIRECT'
+#    - 'https://dns.google.com/dns-query#DIRECT'
+
+#Nextdns(No Filter/No log/Anycast)Dual Stack
+#    - 'quic://doh3.dns.nextdns.io:853#DIRECT'
+#    - 'tls://doh3.dns.nextdns.io:853#DIRECT'
+#    - 'https://doh3.dns.nextdns.io/dns-query#DIRECT'
+
+#UN-CN Dot NO 853#DIRECT'(Filter ?/log ?)
+#    - 'tls://dns.cmrg.net:53053#DIRECT'
+#    - 'tls://dns.cmrg.net:443#DIRECT'
+
+#CloudFlare Doh(No Filter/No log/Anycast/Edns)
+#    - 'tls://1dot1dot1dot1.cloudflare-dns.com:853'
+#    - 'https://1dot1dot1dot1.cloudflare-dns.com/dns-query#h3=true'
+#    - 'tls://1dot1dot1dot1.cloudflare-dns.com:853#DIRECT'
+#    - 'https://1dot1dot1dot1.cloudflare-dns.com/dns-query#DIRECT'
+#    - 'https://162.159.36.1/dns-query#DIRECT'
+#    - 'https://162.159.46.1/dns-query#DIRECT'
+#CF-Mirror-DNS
+#    - 'https://google.cloudflare-dns.com/dns-query#DIRECT'
+#    - 'https://119dot29dot29dot29.cloudflare-dns.com/dns-query#DIRECT'
+#    - 'https://rubyfish.cn.cloudflare-dns.com/dns-query#DIRECT'
+
+#CF-GateWay
+#    - 'tls://cf.cloudflare-gateway.com:853#DIRECT'
+#    - 'https://cf.cloudflare-gateway.com/dns-query#DIRECT'
+
+#IBM Doh(No Filter/No log/Anycast/Edns)
+#    - 'tls://dns-nosec.quad9.net:853#DIRECT'
+#    - 'tls://dns10.quad9.net:853#DIRECT'
+#    - 'https://dns10.quad9.net:5053/dns-query#DIRECT'
+#    - 'https://dns10.quad9.net/dns-query#DIRECT'
+
+#Adguard(No Filter/No log/Anycast)
+#    - 'quic://unfiltered.adguard-dns.com:8853#DIRECT'
+#    - 'quic://unfiltered.adguard-dns.com:784#DIRECT'
+#    - 'tls://unfiltered.adguard-dns.com:853#DIRECT'
+#    - 'https://unfiltered.adguard-dns.com/dns-query#DIRECT'
+
+
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    geosite:                         
+#    【Meta专属】设定geosite某分类使用fallback返回结果
+#    - bytedance
+#    - youtube
+#    - bilibili
+    - gfw
+#    - cn
+#    - geolocation-!cn
+#    - tld-opennic
+#    - tld-cn
+#    - tld-!cn
+    ipcidr:
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 198.18.0.0/16
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/4
+    - 240.0.0.0/4
+    - 255.255.255.255/32
+    - ::1/128
+    - fc00::/7
+    - fe80::/10
+#反诈 拦截
+    - 39.102.194.95/32
+    - 182.43.124.6/32
+    - 101.35.177.86/32
+#Geoip-CN 污染解析
+    - 116.89.243.8/32
+    - 119.28.87.227/32
+#Adg拦截
+    - 94.140.14.35/32
+    domain:
+    - '+.xincache.com'
+#vedio
+#    - '+.bilibili.tv'
+#    - '+.bilibili.com'
+#    - '+.douyin.com'
+#    - '+.youtube.com'
+#google
+#    - 'www.gstatic.com'
+#    - '+.ampproject.org'
+#    - '+.appspot.com'
+#    - '+.blogger.com'
+#    - '+.google.com'
+#    - '+.google.cn'
+#    - '+.googleusercontent.com'
+#    - '+.ggpht.com'
+#    - '+.gmail.com'
+#    - '+.gvt0.com'
+#    - '+.gvt1.com'
+#    - '+.gvt2.com'
+#    - '+.gvt3.com'
+#    - '+.youtu.be'
+#    - '+.yt.be'
+#    - '+.ytimg.com'
+#    - '+.googlevideo.com'
+#    - '+.xn--ngstr-lra8j.com'
+#    - '+.xn--flw351e.com'
+#    - '+.xn--9kr7l.com'
+#    - '+.xn--ggle-55da.com'
+#    - '+.xn--gogl-0nd52e.com'
+#    - '+.xn--gogl-1nd42e.com'
+#Google 定位
+    - '+.googleapis.com'
+    - '+.googleapis.cn'
+    - '+.gstatic.com'
+    - '+.gstatic.cn'
+#    - '+.services.googleapis.cn'
+#    - '+.services.googleapis.com'
+#    - '+.connectivitycheck.gstatic.cn'
+#    - '+.connectivitycheck.gstatic.com'
+
+
+
+  nameserver-policy:
+
+#用于拦截
+    "geosite:category-ads-all":
+#18Bit
+    - 'https://doh.18bit.cn/dns-query#DIRECT'
+#Adguard family(No Filter/No log/Anycast)
+    - 'quic://family.adguard-dns.com:784#DIRECT'
+    - 'tls://family.adguard-dns.com:853#DIRECT'
+    - 'https://family.adguard-dns.com/dns-query#DIRECT'
+
+
+
+#    "geosite:category-ads-all": rcode://success
+
+
+#    "geosite:cn":
+#CN UDP DNS
+#    - 'udp://223.5.5.5:53#DIRECT'
+#    - 'udp://119.29.29.29:53#DIRECT'
+
+
+
+
+tun:
+  enable: true
+  stack: gvisor
+# system# gvisor / lwip
+  dns-hijack:
+    - any:53
+#    - tcp://any:53
+#  - any:5353
+#  interface-name: 以太网
+  auto-route: true 
+#  auto set global route for Windows# It is recommended to use `interface-name`
+  auto-detect-interface: true 
+#  auto detect interface, conflict with `interface-name`
+#  mtu: 9000# 最大传输单元
+#  strict_route: true# 将所有连接路由到tun来防止泄漏，但你的设备将无法其他设备被访问
+  inet4_route_address:
+#  启用 auto_route 时使用自定义路由而不是默认路由
+    - 0.0.0.0/1
+    - 128.0.0.0/1
+  inet6_route_address:
+#  启用 auto_route 时使用自定义路由而不是默认路由
+    - '::/1'
+    - '8000::/1'
+
+
+proxy-providers:
+  机场订阅1:
+    type: http
+    path: ./Proxy-Providers/机场订阅1.yaml
+    url: https://api.dler.io/sub?target=clash&url=https://sub.paasmi.com/subscribe/264119/41xoCCbn8GNF
+    interval: 3600
+    health-check:
+      enable: true
+      url: http://clients3.google.com/generate_204
+      interval: 600
+
+  免费订阅1:
+    type: http
+    path: ./Proxy-Providers/免费订阅1.yaml
+    url: https://api.dler.io/sub?target=clash&url=https://raw.githubusercontent.com/freefq/free/master/v2&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FLittleRey%2Fclash-yaml%2Fmain%2Ffreev2.ini&list=true&new_name=true&upload=false&udp=true
+    interval: 3600
+    health-check:
+      enable: true
+      url: http://clients3.google.com/generate_204
+      interval: 600
+
+
+
+  CloudFlareWarp:
+    type: http
+    path: ./Proxy-Providers/CloudFlareWarp.yaml
+    url: https://cors.buildtest.site/https://raw.githubusercontent.com/LittleRey/clashx-meta/main/CF-Warp.yaml
+    interval: 3600
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 600
+
+
+  Netease:
+    type: http
+    path: ./Proxy-Providers/Netease.yaml
+    url: https://cors.buildtest.site/https://gist.githubusercontent.com/LittleRey/eb883cde24fd1024bdd10c151ce28e50/raw/Netease.yaml
+    interval: 3600
+    health-check:
+      enable: true
+      url: http://music.163.com/generate_204
+      interval: 600
+
+
+proxy-groups:
+  - name: 非CN-IP-代理
+    type: select
+    use:
+    - CloudFlareWarp
+    - 机场订阅1
+    - 免费订阅1
+
+    proxies:
+    - Fallback
+    - DIRECT
+
+
+
+  - name: OPENAI
+    type: select
+    use:
+    - CloudFlareWarp
+    - 机场订阅1
+    - 免费订阅1
+
+    proxies:
+    - Fallback
+    - 非CN-IP-代理
+    - DIRECT
+
+
+
+  - name: Fallback
+    type: fallback
+#    filter: "IPLC|IEPL|专线|中转|BGP|原生|0.0" 
+#    exclude-filter: '巴黎' 
+#    Supports regular expressions to exclude based on node name
+#    exclude-type: 'ss'# Tidak mendukung ekspresi reguler, dipisahkan dengan '|', dikecualikan menurut jenis node
+    use:
+    - CloudFlareWarp
+    - 机场订阅1
+    - 免费订阅1
+
+    url: https://www.gstatic.com/generate_204
+    interval: 120
+    lazy: true
+    
+
+
+  - name: 网易云音乐
+    type: select
+    use:
+    - Netease
+    proxies:
+    - DIRECT
+    - 非CN-IP-代理
+
+
+
+
+  - name: CN-IP-直连
+    type: select
+    use:
+    - CloudFlareWarp
+    - 机场订阅1
+    - 免费订阅1
+    
+    proxies:
+    - DIRECT
+    - 非CN-IP-代理
+    - Fallback
+
+
+
+rule-providers:
+  Local:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/Local.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Local.list
+    interval: 3600
+
+  Proxy:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/Proxy.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Proxy.list
+    interval: 3600
+
+  GeoIP-Foreign:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/GeoIP-Foreign.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/GeoIP-Foreign.list
+    interval: 3600
+
+  HTTPDNS:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/HTTPDNS.list
+    url: https://cors.buildtest.site/https://github.com/VirgilClyne/GetSomeFries/raw/main/ruleset/HTTPDNS.Block.yaml
+    interval: 3600
+
+  Talk:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/Talk.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Talk.list
+    interval: 3600
+
+  Remote-DeskTop:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/Remote-DeskTop.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Remote-DeskTop.list
+    interval: 3600
+
+  UnBlock:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/UnBlock.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/UnBlock.list
+    interval: 3600
+
+  NeteaseMusic:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/NeteaseMusic.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/NeteaseMusic.list
+    interval: 3600
+
+  NeteaseMusicClient:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/NeteaseMusicClient.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/NeteaseMusicClient.list
+    interval: 3600
+
+  Direct:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/Direct.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Direct.list
+    interval: 3600
+
+  Browser:
+    type: http
+    behavior: classical
+    path: ./Rule-Providers/Browser.list
+    url: https://cors.buildtest.site/https://github.com/LittleRey/clash-yaml/raw/main/rules/Browser.list
+    interval: 3600
+
+
+rules:
+ - RULE-SET,Local,DIRECT
+# - AND,((DOMAIN-SUFFIX,net.anydesk.com),(DOMAIN-KEYWORD,relay)),REJECT
+ - RULE-SET,Direct,DIRECT
+ - RULE-SET,Proxy,非CN-IP-代理
+## block udp/quic YouTube
+ - AND,((NETWORK,udp),(DST-PORT,443),(GEOSITE,youtube)),REJECT
+# - AND,((NETWORK,udp),(OR,((DST-PORT,443/80),(GEOSITE,youtube)))),REJECT
+# - AND,((NETWORK,udp),(GEOSITE,youtube)),REJECT
+###
+ - AND,((RULE-SET,NeteaseMusicClient),(RULE-SET,NeteaseMusic)),网易云音乐
+
+ - GEOSITE,openai,OPENAI
+
+ - GEOSITE,gfw,非CN-IP-代理
+ - AND,((NOT,((GEOIP,HK))),(NOT,((GEOIP,MO))),(NOT,((GEOIP,TW))),(GEOIP,CN)),CN-IP-直连
+ - AND,((GEOIP,CN),(GEOSITE,cn)),CN-IP-直连
+ - MATCH,非CN-IP-代理
