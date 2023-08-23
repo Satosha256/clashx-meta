@@ -541,9 +541,9 @@ proxy-groups:
     - 免费订阅1
 
     proxies:
-    - Fallback
-    - DIRECT
 
+    - DIRECT
+    - Fallback
 
 
   - name: OPENAI
@@ -567,7 +567,7 @@ proxy-groups:
 #    Supports regular expressions to exclude based on node name
 #    exclude-type: 'ss'# Tidak mendukung ekspresi reguler, dipisahkan dengan '|', dikecualikan menurut jenis node
     use:
-    - CloudFlareWarp
+#    - CloudFlareWarp
     - 机场订阅1
     - 免费订阅1
 
