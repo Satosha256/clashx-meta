@@ -448,16 +448,16 @@ dns:
 
 
 
-  nameserver-policy:
+#  nameserver-policy:
 
 #用于拦截
-    "geosite:category-ads-all":
+#    "geosite:category-ads-all":
 #18Bit
-    - 'https://doh.18bit.cn/dns-query#DIRECT'
+#    - 'https://doh.18bit.cn/dns-query#DIRECT'
 #Adguard family(No Filter/No log/Anycast)
-    - 'quic://family.adguard-dns.com:784#DIRECT'
-    - 'tls://family.adguard-dns.com:853#DIRECT'
-    - 'https://family.adguard-dns.com/dns-query#DIRECT'
+#    - 'quic://family.adguard-dns.com:784#DIRECT'
+#    - 'tls://family.adguard-dns.com:853#DIRECT'
+#    - 'https://family.adguard-dns.com/dns-query#DIRECT'
 
 
 
@@ -546,19 +546,6 @@ proxy-groups:
     - Fallback
 
 
-  - name: OPENAI
-    type: select
-    use:
-    - CloudFlareWarp
-    - 机场订阅1
-    - 免费订阅1
-
-    proxies:
-    - Fallback
-    - 非CN-IP-代理
-    - DIRECT
-
-
 
   - name: Fallback
     type: fallback
@@ -639,8 +626,10 @@ rules:
 # - AND,((NETWORK,udp),(GEOSITE,youtube)),REJECT
 ###
 
- - GEOSITE,openai,OPENAI
 
+ - GEOIP,HK,非CN-IP-代理
+ - GEOIP,TW,非CN-IP-代理
+ - GEOIP,MO,非CN-IP-代理
  - GEOSITE,gfw,非CN-IP-代理
  - AND,((NOT,((GEOIP,HK))),(NOT,((GEOIP,MO))),(NOT,((GEOIP,TW))),(GEOIP,CN)),CN-IP-直连
  - AND,((GEOIP,CN),(GEOSITE,cn)),CN-IP-直连
