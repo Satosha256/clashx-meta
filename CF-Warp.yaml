@@ -1,3 +1,13 @@
 proxies:
-  - {name: 🇺🇳 CFWarp-V4入口-IPV4, type: wireguard, server: ipv4-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:81cb:773e:850b:53b0:caae, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: QPPSIpWmlkJ1eD+ZtjKKcMnbH6hroVwZA8qqNJ/dW24=, udp: true, reserved: jnJF}
-  - {name: 🇺🇳 CFWarp-V6入口-IPV4, type: wireguard, server: ipv6-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:81cb:773e:850b:53b0:caae, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: QPPSIpWmlkJ1eD+ZtjKKcMnbH6hroVwZA8qqNJ/dW24=, udp: true, reserved: jnJF}
+  - {name: 🇺🇳 CFWarp1-V4入口-IPV4, type: wireguard, server: ipv4-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:81cb:773e:850b:53b0:caae, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: QPPSIpWmlkJ1eD+ZtjKKcMnbH6hroVwZA8qqNJ/dW24=, udp: true, reserved: jnJF}
+  - {name: 🇺🇳 CFWarp1-V6入口-IPV4, type: wireguard, server: ipv6-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:81cb:773e:850b:53b0:caae, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: QPPSIpWmlkJ1eD+ZtjKKcMnbH6hroVwZA8qqNJ/dW24=, udp: true, reserved: jnJF}
+
+  - {name: 🇺🇳 CFWarp2-V4入口-IPV4, type: wireguard, server: ipv4-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:8504:6843:e7f7:384e:f577, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: gML+T+oAPtthHepExTkSK7ImXiZeEMEzKSFELchX1Es=, udp: true}
+  - {name: 🇺🇳 CFWarp2-V6入口-IPV4, type: wireguard, server: ipv6-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:8504:6843:e7f7:384e:f577, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: gML+T+oAPtthHepExTkSK7ImXiZeEMEzKSFELchX1Es=, udp: true}
+  - {name: 🇺🇳 CFWarp3-V4入口-IPV4, type: wireguard, server: ipv4-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:81e3:8410:4462:1481:b976, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: YKUsA8Ik/szbDoLiZtcSHa/jfPFGw7lRsjsQsaXSZ14=, udp: true}
+  - {name: 🇺🇳 CFWarp3-V6入口-IPV4, type: wireguard, server: ipv6-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:81e3:8410:4462:1481:b976, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: YKUsA8Ik/szbDoLiZtcSHa/jfPFGw7lRsjsQsaXSZ14=, udp: true}
+
+
+
+
+
