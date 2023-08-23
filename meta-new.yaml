@@ -1,6 +1,6 @@
 mixed-port: 7890
 allow-lan: true
-bind-address: "*"
+# bind-address: "*"
 mode: rule
 log-level: debug
 
