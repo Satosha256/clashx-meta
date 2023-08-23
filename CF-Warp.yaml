@@ -1,0 +1,3 @@
+proxies:
+  - {name: 🇺🇳 CFWarp-V4入口-IPV4, type: wireguard, server: ipv4-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:81cb:773e:850b:53b0:caae, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: QPPSIpWmlkJ1eD+ZtjKKcMnbH6hroVwZA8qqNJ/dW24=, udp: true, reserved: jnJF}
+  - {name: 🇺🇳 CFWarp-V6入口-IPV4, type: wireguard, server: ipv6-engage.buildtest.site, port: 2408, ip: 172.16.0.2, ipv6: 2606:4700:110:81cb:773e:850b:53b0:caae, public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=, private-key: QPPSIpWmlkJ1eD+ZtjKKcMnbH6hroVwZA8qqNJ/dW24=, udp: true, reserved: jnJF}
