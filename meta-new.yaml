@@ -1,6 +1,6 @@
 mixed-port: 7890
 allow-lan: true
-bind-address: '*'
+bind-address: "*"
 mode: rule
 log-level: debug
 
@@ -9,9 +9,8 @@ log-level: debug
 ipv6: true
 # external-ui: ./Yacd-meta-gh-pages
 
-external-controller: 0.0.0.0:9090
-# RESTful API 监听地址
-secret: '12345'
+external-controller: 127.0.0.1:9090 
+secret: ""
 
 
 unified-delay: true
