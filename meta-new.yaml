@@ -9,7 +9,7 @@ log-level: debug
 ipv6: true
 # external-ui: ./Yacd-meta-gh-pages
 
-external-controller: 127.0.0.1:9090
+external-controller: 0.0.0.0:9090
 # RESTful API 监听地址
 secret: ''
 
@@ -502,7 +502,7 @@ proxy-providers:
   机场订阅1:
     type: http
     path: ./Proxy-Providers/机场订阅1.yaml
-    url: https://api.dler.io/sub?target=clash&url=https://sub.paasmi.com/subscribe/264119/41xoCCbn8GNF
+    url: https://cors.buildtest.site/https://api.dler.io/sub?target=clash&url=https://sub.paasmi.com/subscribe/264119/41xoCCbn8GNF
     interval: 3600
     health-check:
       enable: true
@@ -512,7 +512,7 @@ proxy-providers:
   免费订阅1:
     type: http
     path: ./Proxy-Providers/免费订阅1.yaml
-    url: https://api.dler.io/sub?target=clash&url=https://raw.githubusercontent.com/freefq/free/master/v2&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FLittleRey%2Fclash-yaml%2Fmain%2Ffreev2.ini&list=true&new_name=true&upload=false&udp=true
+    url: https://cors.buildtest.site/https://api.dler.io/sub?target=clash&url=https://raw.githubusercontent.com/freefq/free/master/v2&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FLittleRey%2Fclash-yaml%2Fmain%2Ffreev2.ini&list=true&new_name=true&upload=false&udp=true
     interval: 3600
     health-check:
       enable: true
